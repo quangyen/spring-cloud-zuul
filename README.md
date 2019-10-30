@@ -5,3 +5,4 @@
 
 # Test:
 - curl http://localhost:8080/greeting/simple[1-10]
+- [ngrok](https://ngrok.com/download)
