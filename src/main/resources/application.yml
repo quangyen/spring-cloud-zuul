@@ -6,13 +6,16 @@ zuul:
     serviceAdvanced:
       path: /greeting/advanced
       url: forward:/
+    httpstat:
+      path: /httpstat/**
+      url: https://httpstat.us
   ratelimit:
     enabled: true
     repository: JPA
     policy-list:
       serviceSimple:
       - limit: 5
-        refresh-interval: 60
+        refresh-interval: 10
         type:
         - origin
       serviceAdvanced:
@@ -20,11 +23,16 @@ zuul:
         refresh-interval: 2
         type:
         - origin
+      httpstat:
+        - limit: 1
+          refresh-interval: 2
+          type:
+            - origin
   strip-prefix: true
 
 spring.h2.console.enabled: true
 spring.h2.console.path: /h2
-
+#logging.level.root: debug
 # Server timeout
 zuul.host.connect-timeout-millis: 2000
 zuul.host.connection-request-timeout-millis: 2000
